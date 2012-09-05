@@ -1,0 +1,12 @@
+CBS Sports Rankings:  http://fantasynews.cbssports.com/fantasyfootball/rankings
+
+ESPN Sports Rankings: http://sports.espn.go.com/fantasy/football/ffl/story?page=12ranksWeek1WR
+
+Yahoo (Crowdsourced): http://football.fantasysports.yahoo.com/f1/rankerresults
+   -- we will need a fixed time to grab these, as they are changing constantly
+
+Fox Sports: http://msn.foxsports.com/fantasy/football/commissioner/Research/Projections.aspx
+
+FFToolbox:  http://www.fftoolbox.com/football/2012/weeklycheatsheets.cfm
+
+Others?
