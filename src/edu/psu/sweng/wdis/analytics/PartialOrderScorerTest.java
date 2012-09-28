@@ -12,12 +12,12 @@ import edu.psu.sweng.wdis.database.Player;
 import edu.psu.sweng.wdis.database.Position;
 import edu.psu.sweng.wdis.database.Prediction;
 
-
 /**
- * An implementation of the statistical scoring test cases in the current test plan 
- * document.  Each 
- * @author John
- *
+ * This is an implementation of the current test plan for the statistics
+ * processing engine. Each test is for a specf
+ * 
+ * @author JohnnyO
+ * 
  */
 public class PartialOrderScorerTest {
 
@@ -30,7 +30,10 @@ public class PartialOrderScorerTest {
     }
 
     /**
-     * Implementation of test case 2.1
+     * Implementation of test case 2-1. In this test case, we compare a
+     * prediction and actual result that are identical in order to ensure that
+     * the maximum upper bound of the evaluator is +1.
+     * 
      */
     @Test
     public void testPerfectPrediction() {
@@ -47,7 +50,8 @@ public class PartialOrderScorerTest {
     }
 
     /**
-     * Implementation of test case 2.2
+     * Implementation of test case 2-2. Here, we test a prediction which
+     * predicts none of the actual results. This should produce an output of -1
      */
     @Test
     public void testBadPrediction() {
@@ -60,7 +64,7 @@ public class PartialOrderScorerTest {
         PartialOrderScorer scorer = new PartialOrderScorer();
 
         float score = scorer.evaluate(prediction, result);
-        assertEquals(0, score, 1e-6);
+        assertEquals(-1.0, score, 1e-6);
     }
 
     /**
@@ -70,7 +74,7 @@ public class PartialOrderScorerTest {
     public void testClosePrediction() {
 
         List<Player> input = genPlayerList("A", "B", "C", "D", "E");
-        List<Player> output = genPlayerList("A", "B", "C", "D", "F");
+        List<Player> output = genPlayerList("A", "B", "C", "F", "E");
 
         Prediction prediction = new Prediction(1, Position.QB, input);
         ActualResult result = new ActualResult(1, Position.QB, output);
@@ -87,14 +91,14 @@ public class PartialOrderScorerTest {
     public void testReorderedPrediction() {
 
         List<Player> input = genPlayerList("A", "B", "C", "D", "E");
-        List<Player> output = genPlayerList("A", "C", "B", "D", "F");
+        List<Player> output = genPlayerList("A", "C", "B", "D", "E");
 
         Prediction prediction = new Prediction(1, Position.QB, input);
         ActualResult result = new ActualResult(1, Position.QB, output);
         PartialOrderScorer scorer = new PartialOrderScorer();
 
         float score = scorer.evaluate(prediction, result);
-        assertEquals(0.90, score, 1e-6);
+        assertEquals(0.80, score, 1e-6);
     }
 
     /**
