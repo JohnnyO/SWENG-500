@@ -20,6 +20,11 @@ public class Player {
         this.position = position;
         this.team = team;
     }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 
     @Override
     public int hashCode() {
