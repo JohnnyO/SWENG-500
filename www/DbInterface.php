@@ -1,7 +1,7 @@
 <?php
 
 /*================================================================================================= 
-    Web Site:      Who To Pick
+    Web Site:      Who Do I Start
     File:          DbInterface.php 
     Description:   This PHP class will contain the functions required to get information on the 
                    clients browser. This will be used to the target the correct browser with the 
