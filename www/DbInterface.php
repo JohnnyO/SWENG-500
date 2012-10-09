@@ -59,6 +59,19 @@ class DbInterface
        
     }
     
+    function dbPositionQuery($position)
+    {
+        $posResult = mysql_query("SELECT $$position FROM {$table}");
+        if (!$posResult)
+        {
+            return NULL;
+        }
+        else
+        {
+            return $posResult;
+        }
+    }
+    
     
     //This is a function to use for the demo.
    /* function getDemoTable()
