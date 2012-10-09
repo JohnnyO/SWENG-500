@@ -36,19 +36,22 @@
     </head>
   
     <body>
+        <h1>Welcome to "who Do I Start?"</h1>
+        <hr/>
         <div class="ui-widget">
-            <h1>Step 1: Choose a Position</h1>
+            <h3>Step 1: Choose a Position</h3>
             <label for="pos">Position: </label>
             <input id="pos" />
         
-            <h1>Step 2: Choose 1st Player</h1>
+            <h3>Step 2: Choose 1st Player</h3>
             <label for="player1">Player 1: </label>
             <input id="player1" />
         
-            <h1>Step 3: Choose 2nd Player</h1>
+            <h3>Step 3: Choose 2nd Player</h3>
             <label for="player2">Player 2: </label>
             <input id="player2" />
         </div>
+        <hr/>
 </div>
     </body>
 </html>
