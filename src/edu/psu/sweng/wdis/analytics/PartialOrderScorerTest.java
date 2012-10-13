@@ -8,10 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.psu.sweng.wdis.database.ActualResult;
 import edu.psu.sweng.wdis.database.Player;
 import edu.psu.sweng.wdis.database.Position;
 import edu.psu.sweng.wdis.database.Prediction;
+import edu.psu.sweng.wdis.database.Ranking;
 
 /**
  * This is an implementation of the current test plan for the statistics processing engine for the PartialOrderScorer
@@ -47,7 +47,7 @@ public class PartialOrderScorerTest extends ScorerTest {
     public void testBadPrediction() {
 
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        ActualResult result = generateActualResult(1, Position.QB, "F", "G", "H", "I", "J");
+        Ranking result = generateActualResult(1, Position.QB, "F", "G", "H", "I", "J");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(-1.0, score, 1e-6);
@@ -60,7 +60,7 @@ public class PartialOrderScorerTest extends ScorerTest {
     public void testClosePrediction() {
 
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        ActualResult result = generateActualResult(1, Position.QB, "A", "B", "C", "F", "E");
+        Ranking result = generateActualResult(1, Position.QB, "A", "B", "C", "F", "E");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(0.80, score, 1e-6);
@@ -73,7 +73,7 @@ public class PartialOrderScorerTest extends ScorerTest {
     public void testReorderedPrediction() {
 
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        ActualResult result = generateActualResult(1, Position.QB, "A", "C", "B", "D", "E");
+        Ranking result = generateActualResult(1, Position.QB, "A", "C", "B", "D", "E");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(0.80, score, 1e-6);

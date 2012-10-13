@@ -2,24 +2,12 @@ package edu.psu.sweng.wdis.database;
 
 import java.util.List;
 
-public class Prediction {
-
-    private int week;
-    private Position position;
-    private List<Player> players;
+public class Prediction extends Ranking {
 
     public Prediction(int week, Position position, List<Player> players) {
         this.week = week;
         this.position = position;
         this.players = players;
-    }
-
-    public Player get(int rank) {
-        return players.get(rank);
-    }
-
-    public List<Player> getAll() {
-        return players;
     }
 
     /**
@@ -54,17 +42,7 @@ public class Prediction {
         return false;
     }
 
-    private int getRank(Player better) {
-        return players.indexOf(better);
-    }
 
-    private boolean contains(Player player) {
-        // TODO Auto-generated method stub
-        return players.contains(player);
-    }
 
-    public int size() {
-        return players.size();
-    }
 
 }

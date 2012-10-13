@@ -8,7 +8,7 @@ public class DBInterface {
         return null;
     }
 
-    public ActualResult getActualResults(int week, Position position) {
+    public Ranking getActualResults(int week, Position position) {
         return null;
     }
 

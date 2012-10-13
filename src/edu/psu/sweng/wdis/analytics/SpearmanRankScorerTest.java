@@ -6,9 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.psu.sweng.wdis.database.ActualResult;
 import edu.psu.sweng.wdis.database.Position;
 import edu.psu.sweng.wdis.database.Prediction;
+import edu.psu.sweng.wdis.database.Ranking;
 
 public class SpearmanRankScorerTest extends ScorerTest {
 
@@ -45,7 +45,7 @@ public class SpearmanRankScorerTest extends ScorerTest {
     public void testReorderedPrediction() {
 
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        ActualResult result = generateActualResult(1, Position.QB, "A", "C", "B", "D", "E");
+        Ranking result = generateActualResult(1, Position.QB, "A", "C", "B", "D", "E");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(0.90, score, 1e-6);
@@ -58,7 +58,7 @@ public class SpearmanRankScorerTest extends ScorerTest {
     public void testTopBottomSwapPrediction() {
 
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        ActualResult result = generateActualResult(1, Position.QB, "E", "B", "C", "D", "A");
+        Ranking result = generateActualResult(1, Position.QB, "E", "B", "C", "D", "A");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(-0.60, score, 1e-6);
@@ -70,10 +70,10 @@ public class SpearmanRankScorerTest extends ScorerTest {
      */
     public void testMinorSwapChaining() {
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E", "F");
-        ActualResult result = generateActualResult(1, Position.QB, "B", "A", "D", "C", "F", "E");
+        Ranking result = generateActualResult(1, Position.QB, "B", "A", "D", "C", "F", "E");
 
         float score = scorer.evaluate(prediction, result);
-        assertEquals(0.829, score, 1e-6);
+        assertEquals(0.82857, score, 1e-3);
 
     }
 
@@ -83,7 +83,7 @@ public class SpearmanRankScorerTest extends ScorerTest {
      */
     public void testBadData() {
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C");
-        ActualResult result = generateActualResult(1, Position.QB, "D", "E", "F");
+        Ranking result = generateActualResult(1, Position.QB, "D", "E", "F");
 
         float score = scorer.evaluate(prediction, result);
     }

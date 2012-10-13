@@ -2,14 +2,14 @@ package edu.psu.sweng.wdis.analytics;
 
 import java.util.NoSuchElementException;
 
-import edu.psu.sweng.wdis.database.ActualResult;
 import edu.psu.sweng.wdis.database.Player;
 import edu.psu.sweng.wdis.database.Prediction;
+import edu.psu.sweng.wdis.database.Ranking;
 
 public class PartialOrderScorer implements Scorer {
 
     @Override
-    public float evaluate(Prediction prediction, ActualResult actualResult) {
+    public float evaluate(Prediction prediction, Ranking actualResult) {
 
         int concordant = 0; // the number of correct predictions
         int discordant = 0; // the number of incorrect predictions

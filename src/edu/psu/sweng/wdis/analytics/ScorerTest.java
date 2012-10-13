@@ -11,6 +11,7 @@ import edu.psu.sweng.wdis.database.ActualResult;
 import edu.psu.sweng.wdis.database.Player;
 import edu.psu.sweng.wdis.database.Position;
 import edu.psu.sweng.wdis.database.Prediction;
+import edu.psu.sweng.wdis.database.Ranking;
 
 public class ScorerTest {
     
@@ -28,14 +29,14 @@ public class ScorerTest {
         return new Prediction(week, position, genPlayerList(names));
     }
     
-    public ActualResult generateActualResult(int week, Position position, String... names) {
+    public Ranking generateActualResult(int week, Position position, String... names) {
         return new ActualResult(week, position, genPlayerList(names));
     }
 
     public void testPerfectPrediction() {
     
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        ActualResult result = generateActualResult(1, Position.QB, "A", "B", "C", "D", "E");
+        Ranking result = generateActualResult(1, Position.QB, "A", "B", "C", "D", "E");
     
         float score = scorer.evaluate(prediction, result);
         assertEquals(1, score, 1e-6);
@@ -44,7 +45,7 @@ public class ScorerTest {
     public void testReversePrediction() {
     
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        ActualResult result = generateActualResult(1, Position.QB, "E", "D", "C", "B", "A");
+        Ranking result = generateActualResult(1, Position.QB, "E", "D", "C", "B", "A");
     
         float score = scorer.evaluate(prediction, result);
         assertEquals(-1, score, 1e-6);

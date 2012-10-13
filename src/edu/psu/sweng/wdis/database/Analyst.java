@@ -12,7 +12,7 @@ public class Analyst {
     List<Prediction> predictions;
     
     
-    public Prediction getPrediction(int week, Position position) {
+    public Ranking getPrediction(int week, Position position) {
         return null;
     }
     
