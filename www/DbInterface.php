@@ -21,6 +21,7 @@ class DbInterface
     var $database;
     var $table1;
     var $con; 
+    var $dbcon;
     
     //Constructor
     function DbInterface()
@@ -28,14 +29,15 @@ class DbInterface
         $this->dbAddress = "localhost:3306";
         $this->dbLogIn = "root";
         $this->dbPassword = "developer1";
-        $this->database = "wdis";
-        $this->table = "NEED NEW ONE";
+        $this->database = "test";
+        $this->table = "Player";
     }
     
     function connectDb()
     {
-        $con = mysql_connect(dbAddress, dbLogIn, "temp");
-        if (!con)
+        $con = mysql_connect("localhost:3306", "root", "developer1");
+        $dbcon = mysql_select_db("test");
+        if (!$con)
         {
             return FALSE;
         }else{
@@ -45,15 +47,21 @@ class DbInterface
     
     function dbQueryPlayerComp($playerName1, $playerName2)
     {
-        $qResult1 = mysql_query("SELECT $playerName1 FROM {$table}");
-        $qResult2 = mysql_query("SELECT $playerName2 FROM {$table}");
+        $qResult1 = mysql_query("SELECT * FROM Player WHERE name = '$playerName1'");
+        $qResult2 = mysql_query("SELECT * FROM Player WHERE name = '$playerName2'");
         
-        if (!qResult1 or !qResult2)
+        
+        if (!$qResult1 or !$qResult2)
         {
             return NULL;
         }
-        elseif (qResult1 and $qResult2)
+        elseif($qResult1 == $qResult2)
         {
+            return NULL;
+        }
+        elseif ($qResult1 and $qResult2)
+        {
+            $finalResult = $qResult1.$qResult2;
             return $finalResult;
         }
        

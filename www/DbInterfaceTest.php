@@ -24,16 +24,16 @@ class DbTest extends PHPUnit_Framework_TestCase
     function testQuery1()
     //This function tests the case where there is a nonexistant record.
     {
-        $results = DbInterface::dbQueryPlayerComp("Manning", "Mickey");
-        $expected = !NULL;
+        $results = DbInterface::dbQueryPlayerComp("Aaron Rogers", "Mickey Mouse");
+        $expected = NULL;
         $this->assertTrue($results == $expected);
     }   
   
     function testQuery2()
     //This function tests the case where the same player is being compared.
     {
-        $results = DbInterface::dbQueryPlayerComp("Peyton", "Peyton");
-        $expected = !NULL;
+        $results = DbInterface::dbQueryPlayerComp("Aaron Rogers", "Aaron Rogers");
+        $expected = NULL;
         $this->assertTrue($results == $expected);
     }   
     
