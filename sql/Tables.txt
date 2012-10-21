@@ -1,4 +1,3 @@
-player
 
 CREATE  TABLE player(
   idp INT NOT NULL auto_increment,
@@ -8,19 +7,6 @@ CREATE  TABLE player(
   PRIMARY KEY (idp)
 );
 
-insert into player(name,team,position)
-values('Bashar Albadri','Ravens','QB');
-
-insert into player(name,team,position)
-values('John Harrison','Steelers','QB');
-
-insert into player(name,team,position)
-values('John Ohara','Penn State','QB');
-
-insert into player(name,team,position)
-values('Jason MG','Steelers','QB');
-------------------------------------------------
-Analyst
 
 CREATE  TABLE analyst(
   ida INT NOT NULL auto_increment ,
@@ -29,13 +15,6 @@ CREATE  TABLE analyst(
   PRIMARY KEY (ida) 
 );
 
-insert into analyst(name,station) 
-values('Rambo','Yahoo');
-
-insert into analyst(name,station) 
-values('Rocky','ESPN');
-------------------------------------------------
-ranking
 
 create table ranking(
 idp int not null,
@@ -45,10 +24,6 @@ foreign key (idp) references player(idp),
 foreign key (ida) references analyst(ida)
 );
 
-insert into ranking(idp,ida,prediction)
-values(1,1,3),(1,2,10),(2,1,20),(2,2,5),(3,1,14),(3,2,22),(4,1,11),(4,2,7);
-------------------------------------------------
-Accurate Results
 
 CREATE  TABLE actualResult(
   idp INT NOT NULL,
@@ -58,20 +33,6 @@ CREATE  TABLE actualResult(
   PRIMARY KEY (idp, position, week, rank),
   FOREIGN KEY (idp) REFERENCES player(idp)
 );
-
-insert into actualResult(idp,position,week,rank)
-values(1,'QB',1,12);
-
-insert into actualResult(idp,position,week,rank)
-values(2,'QB',1,1);
-    
-insert into actualResult(idp,position,week,rank)
-values(3,'QB',1,7);
-    
-insert into actualResult(idp,position,week,rank)
-values(4,'QB',1,23);  
-------------------------------------------------
-Prediction
 
 CREATE  TABLE prediction(
   ida INT NOT NULL,
@@ -84,18 +45,6 @@ CREATE  TABLE prediction(
   FOREIGN KEY (idp) REFERENCES player(idp)
 );
 
-insert into prediction(ida,idp,week,position,rankOrder)
-values
-(1,1,1,'QB',1),
-(2,1,1,'QB',5),
-(1,2,1,'QB',6),
-(2,2,1,'QB',9),
-(1,3,1,'QB',11),
-(2,3,1,'QB',16),
-(1,4,1,'QB',12),
-(2,4,1,'QB',10);
-------------------------------------------------
-Prediction Accuracy
 
 CREATE  TABLE predictionAccuracy(
   ida INT NOT NULL,
@@ -106,9 +55,4 @@ CREATE  TABLE predictionAccuracy(
   PRIMARY KEY (ida, week, position, accuracyType),
   FOREIGN KEY (ida) REFERENCES analyst(ida) 
 );
-
-insert into predictionAccuracy(ida,week,position,accuracy,accuracyType)
-values
-(1,1,'QB',0.93,'type01'),
-(2,1,'QB',0.03,'type01');
     
