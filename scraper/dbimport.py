@@ -1,5 +1,8 @@
 import sys
 import fileinput
+import MySQLdb
+
+
 
 #Not the most efficient way to search an array, but it will serve
 #Searches through the file to get the list of the players for a given position and week
@@ -12,6 +15,16 @@ def find(lines, week, pos):
     return lines[startIndex+1:endIndex]
     
 
+
+    
+
+
+
+db = MySQLdb.connect(host="209.252.235.46", user="root", passwd="developer1", db="test");
+cur = db.cursor()
+cur.execute("select * from player")
+for row in cur.fetchall():
+    print row
 
 
 
@@ -27,7 +40,14 @@ lines = [line.strip() for line in f.readlines() if len(line.strip()) > 0]  # Get
 
 for week in range(1,8):
     for position in ("QB","RB","WR","TE"):
-        print week, find(lines, str(week), position)
+        players =  find(lines, str(week), position)
+        for player in players:
+            playerFirstName = player.split()[0]
+            playerLastName = player.split()[1]
+            playerTeam = player.split()[-1]
+            print playerFirstName, playerLastName, playerTeam
+            
+             
         
 
 
