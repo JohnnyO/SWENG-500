@@ -1,0 +1,105 @@
+table_player:
+
+insert into player(rank,name,team,week,position)
+values
+
+
+
+(1,'Robert Griffin III',' Wsh',2,'QB'),
+(2,'Eli Manning','NYG',2,'QB'),
+(3,'Cam Newton','Car',2,'QB'),
+(4,'Sam Bradford','StL',2,'QB'),
+(5,'Andy Dalton','Cin',2,'QB'),
+(6,'Michael Vick','Phi',2,'QB'),
+(7,'Philip Rivers','SD',2,'QB'),
+(8,'Brandon Weeden','Cle',2,'QB'),
+(9,'Drew Brees','NO' ,2,'QB'),
+(10,'Ben Roethlisberger','Pit',2,'QB'),
+(11,'Ryan Tannehill','Mia',2,'QB'),
+(12,'Matt Cassel','KC',2,'QB'),
+(13,'Ryan Fitzpatrick',' Buf',2,'QB'),
+(14,'Andrew Luck','Ind',2,'QB'),
+(15,'Alex Smith','SF',2,'QB'),
+(16,'Matt Ryan','Atl',2,'QB'),
+(17,'Carson Palmer','Oak',2,'QB'),
+(18,'Kevin Kolb','Ari',2,'QB'),
+(19,'Christian Ponder','Min',2,'QB'),
+(20,'Tom Brady','NE',2,'QB'),
+(21,'Josh Freeman','TB',2,'QB'),
+(22,'Tony Romo','Dal',2,'QB'),
+(23,'Matthew Stafford','Det',2,'QB'),
+(24,'Russell Wilson','Sea',2,'QB'),
+(25,'Aaron Rodgers','GB',2,'QB'),
+(26,'ake Locker','Ten' ,2,'QB'),
+(27,'Joe Flacco','Bal',2,'QB'),
+(28,'Mark Sanchez','NYJ',2,'QB'),
+(29,'Peyton Manning','Den',2,'QB'),
+(30,'Matt Schaub','Hou',2,'QB'),
+(31,'Blaine Gabbert','Jac',2,'QB'),
+(32,'Jay Cutler','Chi',2,'QB');
+ 
+----------------------------------------
+
+table_analyst
+
+insert into analyst(name,station)
+values('Yahoo','yahoo');
+
+table_ranking
+
+insert into ranking (idp,ida,prediction)
+values
+(9,1,1),
+(25,1,2),
+(20,1,3),
+(16,1,4),
+(1,1,5),
+(29,1,6),
+(22,1,7),
+(23,1,8),
+(3,1,9),
+(32,1,10),
+(27,1,11),
+(30,1,12),
+(2,1,13),
+(6,1,14),
+(10,1,15),
+(7,1,16),
+(15,1,17),
+(14,1,18),
+(17,1,19),
+(28,1,20),
+(12,1,21),
+(5,1,22),
+(13,1,23),
+(19,1,24),
+(31,1,25),
+(26,1,26),
+(21,1,27),
+(4,1,28),
+(24,1,29),
+(18,1,30),
+(11,1,31);
+
+
+
+get all players/rankings
+
+select player.name,analyst.name, prediction, rank
+from player, ranking, analyst
+where player.idp = ranking.idp
+and analyst.ida = ranking.ida;
+
+---------------------------------------
+
+select one analyst results comparison %100 accuracy.
+
+select player.name,analyst.name, prediction, rank
+from player, ranking, analyst
+where player.idp = ranking.idp
+and analyst.ida = ranking.ida
+and player.rank = ranking.prediction;
+
+
+
+
