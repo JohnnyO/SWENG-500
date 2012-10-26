@@ -1,6 +1,8 @@
 package edu.psu.sweng.wdis;
 
 import edu.psu.sweng.wdis.analytics.PartialOrderScorer;
+import edu.psu.sweng.wdis.analytics.Scorer;
+import edu.psu.sweng.wdis.analytics.SpearmanRankScorer;
 import edu.psu.sweng.wdis.database.ActualResult;
 import edu.psu.sweng.wdis.database.Analyst;
 import edu.psu.sweng.wdis.database.DBInterface;
@@ -24,26 +26,15 @@ public class Week9Demonstration {
             for (Position p : positions) {
                    Prediction prediction = db.getPrediction(analyst, week, p, 20);
                    ActualResult result = db.getActualResults(week, p);
-                   PartialOrderScorer scorer = new PartialOrderScorer();
+                   Scorer scorer = new PartialOrderScorer();
                    float score = scorer.evaluate(prediction, result);
                    
-                   System.out.format("%d\t%s\t%s\t%.4f\n", ida, week, p.name(), score);
+                   db.savePrediction(analyst, week, p, score, "partialOrder");
                    
-                   
-                   
+                   System.out.format("%d\t%s\t%s\t%.5f\n", ida, week, p.name(), score);
                }
             }
         }
     }
-    
-    
-  
-    
-    
-    
-    
-
-    
-    
     
 }

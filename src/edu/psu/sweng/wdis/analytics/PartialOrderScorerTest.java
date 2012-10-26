@@ -86,5 +86,25 @@ public class PartialOrderScorerTest extends ScorerTest {
     public void testReversePrediction() {
         super.testReversePrediction();
     }
+    
+    
+    @Test
+    public void testMisguidedPrediction() {
+        Prediction prediction = generatePrediction(1, Position.QB, "A", "B");
+        Ranking result = generateActualResult(1, Position.QB, "D", "E", "A", "C", "B");
+
+        float score = scorer.evaluate(prediction, result);
+        assertEquals(1.0, score, 1e-6);
+    }
+    
+    @Test
+    public void testReverseMisguidedPrediction() {
+        Prediction prediction = generatePrediction(1, Position.QB, "A", "B");
+        Ranking result = generateActualResult(1, Position.QB, "D", "E", "B", "C", "A");
+
+        float score = scorer.evaluate(prediction, result);
+        assertEquals(-1.0, score, 1e-6);
+    }
+
 
 }

@@ -15,7 +15,9 @@ public class SpearmanRankScorer implements Scorer {
             Player player = prediction.get(i);
             int actualPosition = actualResult.getRank(player);
             if (actualPosition == -1) {
-                throw new IllegalArgumentException("ActualResult not available for "  + player);
+                deltaSquared += Math.pow(i - prediction.size(), 2);
+                System.err.println("WARNING: " +player + " not listed in actualResults");
+                //throw new IllegalArgumentException("ActualResult not available for "  + player);
             }
             
             deltaSquared += Math.pow(i - actualPosition, 2);

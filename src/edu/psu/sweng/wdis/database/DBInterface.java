@@ -28,8 +28,10 @@ public class DBInterface {
         return null;
     }
 
-    private static final String GET_ACTUAL_RESULT = "SELECT player.name, player.team, actualResult.rank "
-            + "FROM actualResult, player " + "WHERE actualResult.week=? and actualResult.position=? "
+    private static final String GET_ACTUAL_RESULT = 
+            "SELECT player.name, player.team, actualResult.rank "
+            + "FROM actualResult, player " 
+            + "WHERE actualResult.week=? and actualResult.position=? "
             + "AND actualResult.idp = player.idp " + "ORDER BY rank ASC";
 
     public ActualResult getActualResults(int week, Position position) throws SQLException {
@@ -51,9 +53,14 @@ public class DBInterface {
         return new Analyst(analystID);
     }
 
-    private static final String GET_PREDICTION = "SELECT player.name, player.team, prediction.rankOrder "
-            + "FROM prediction, player " + "WHERE prediction.week=? " + "AND prediction.position=? "
-            + "AND prediction.ida = ? " + "AND prediction.idp = player.idp " + "ORDER BY rankOrder ASC";
+    private static final String GET_PREDICTION = 
+            "SELECT player.name, player.team, prediction.rankOrder "
+            + "FROM prediction, player " 
+            + "WHERE prediction.week=? " 
+            + "AND prediction.position=? "
+            + "AND prediction.ida = ? " 
+            + "AND prediction.idp = player.idp " 
+            + "ORDER BY rankOrder ASC";
 
     public Prediction getPrediction(Analyst analyst, int week, Position position, int limit) throws SQLException {
         PreparedStatement ps = conn.prepareStatement(GET_PREDICTION);
@@ -69,6 +76,25 @@ public class DBInterface {
             players.add(new Player(name, position, team));
         }
         return new Prediction(week, position, players.subList(0, limit));
+    }
+
+    
+    private static final String SAVE_PREDICTION = 
+            "INSERT INTO predictionAccuracy "
+            + "(ida, week, position, accuracy, accuracyType) "
+            + "VALUES (?,?,?,?,?)";
+    
+    public void savePrediction(Analyst analyst, int week, Position position, 
+            float score, String type) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement(SAVE_PREDICTION);
+        ps.setInt(1, analyst.getID());
+        ps.setInt(2, week);
+        ps.setString(3, position.name());
+        ps.setDouble(4, score);
+        ps.setString(5, type);
+        ps.executeUpdate();
+        return;
+        
     }
 
 }

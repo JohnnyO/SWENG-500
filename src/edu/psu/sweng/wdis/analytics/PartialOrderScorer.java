@@ -18,11 +18,19 @@ public class PartialOrderScorer implements Scorer {
         for (int i = 0; i < size; i++) {
             for (int j = i + 1; j < size; j++) {
 
-                Player playerOne = actualResult.get(i);
-                Player playerTwo = actualResult.get(j);
+                Player playerOne = prediction.get(i);
+                Player playerTwo = prediction.get(j);
+                
+                int playerOneRank =  actualResult.getRank(playerOne);
+                if (playerOneRank == -1)
+                    playerOneRank = actualResult.size();
+                int playerTwoRank = actualResult.getRank(playerTwo);
+                if (playerTwoRank == -1)
+                    playerTwoRank = actualResult.size();
+
                 // We know that playerOne was predicted above playerTwo, lets
                 // see if that panned out.
-                if (prediction.didPredict(playerOne, playerTwo)) {
+                if (playerOneRank < playerTwoRank) {
                     concordant++;
                 } else {
                     discordant++;
