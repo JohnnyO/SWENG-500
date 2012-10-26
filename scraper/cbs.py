@@ -14,23 +14,19 @@ def scrape_data_site(url):
    rows = table.findAll('tr')
 
    for tr in rows:
-      
       cols = tr.findAll('td');
       
       for i,td in enumerate(cols):
          if ((i==0) and (re.search(",", td.text))):#ensures that correct rows are printed
-            print td.text
+            
+            print td.text.split(",")[0].strip(),",",
+            print td.text.split(",")[1].strip()
         
-for ranker in ("jamey_eisenberg", "nathan_zegura", "dave_richard"):
-   print "\n"
-   print ranker, "\n"
-
-   for week in (1,2,3,4,5,6,7):
-      print "\n"
-      print week, "\n"
+for ranker in (("jamey_eisenberg",3),("nathan_zegura",4), ("dave_richard",5)):
+   print ranker[0],",",ranker[1], ",CBS.com"
+   for week in range(1,9):
+      print week
       for position in ("QB", "RB", "WR", "TE"): 
-         print "\n"
          print position
-         print "\n"
-         url="http://fantasynews.cbssports.com/fantasyfootball/stats/weeklyprojections/"+position+"/"+str(week)+"/"+ranker
+         url="http://fantasynews.cbssports.com/fantasyfootball/stats/weeklyprojections/"+position+"/"+str(week)+"/"+ranker[0]
          scrape_data_site(url)     
