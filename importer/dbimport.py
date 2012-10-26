@@ -6,6 +6,7 @@ import importer
 db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="root", db="wdis")
 cur = db.cursor()
 
+analystInsert = "INSERT IGNORE INTO ANALYST (ida, name, station) values (%s,%s,%s)"
 predictionInsert = "INSERT into prediction (ida, idp, week, position, rankOrder) values ('%s','%s','%s','%s','%s')"
 
 if len(sys.argv) < 2:
@@ -20,6 +21,8 @@ for fname in sys.argv[1:]:
     analystid = lines[0].split(",")[0]
     analystName = lines[0].split(",")[1]
     analystStation = lines[0].split(",")[2]
+    
+    cur.execute(analystInsert, (analystid, analystName, analystStation))
     
     
     for week in range(1,17):
