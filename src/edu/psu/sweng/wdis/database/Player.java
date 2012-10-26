@@ -2,6 +2,7 @@ package edu.psu.sweng.wdis.database;
 
 public class Player {
 
+
     private String name;
     private Position position;
     private String team;
@@ -25,6 +26,22 @@ public class Player {
     public String toString() {
         return name;
     }
+    
+    
+    public String getName() {
+        return name;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    
+    
 
     @Override
     public int hashCode() {

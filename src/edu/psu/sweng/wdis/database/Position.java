@@ -9,15 +9,15 @@ public enum Position {
     DST("Defense/Special Teams"),
     K("Kicker");
     
-   private String name;
+   private String description;
     
-    private Position(String name) {
-        this.name = name;
+    private Position(String description) {
+        this.description = description;
     }
     
     
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
     
 

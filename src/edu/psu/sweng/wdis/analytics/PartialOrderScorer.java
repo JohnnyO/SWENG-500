@@ -20,10 +20,6 @@ public class PartialOrderScorer implements Scorer {
 
                 Player playerOne = actualResult.get(i);
                 Player playerTwo = actualResult.get(j);
-
-                
-                
-
                 // We know that playerOne was predicted above playerTwo, lets
                 // see if that panned out.
                 if (prediction.didPredict(playerOne, playerTwo)) {

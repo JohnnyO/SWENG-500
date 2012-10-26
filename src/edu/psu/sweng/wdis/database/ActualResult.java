@@ -10,4 +10,6 @@ public class ActualResult extends Ranking {
         this.position = position;
         this.players = players;
     }
+    
+
 }

@@ -3,21 +3,29 @@ package edu.psu.sweng.wdis.database;
 import java.util.List;
 
 /**
- * Data transfer object, mapping 
+ * Data transfer object, mapping
+ * 
  * @author John
- *
+ * 
  */
 public class Analyst {
-    
-    List<Prediction> predictions;
-    
-    
-    public Ranking getPrediction(int week, Position position) {
-        return null;
+
+    private int id;
+    private String name;
+    private String station;
+
+    public Analyst(int id) {
+        this(id, "Unknown", "Unknown");
     }
-    
-    public boolean hasPrediction(int week, Position position) {
-        return false;
+
+    public Analyst(int id, String name, String station) {
+        this.id = id;
+        this.name = name;
+        this.station = station;
+    }
+
+    public int getID() {
+        return id;
     }
 
 }
