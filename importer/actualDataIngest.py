@@ -7,14 +7,16 @@ cur = db.cursor()
 
 
 
-lines = importer.ingestFile('../data/actualData_weeks1_6')
+lines = importer.ingestFile('../data/actualData_weeks1_7')
 for week in range(1,17):
         for position in ("QB","RB","WR","TE"):
             players =  importer.find(lines, str(week), position)
             rank = 1
             for player in players:
-                playerName = player.split(' ')[0].strip() +" "+ player.split(' ')[1].strip()
-                playerTeam = player.split(' ')[-1].strip()
+                playerName = player.split(',')[0].strip()
+                playerName = importer.sanitizePlayerName(playerName)
+                playerTeam = player.split(',')[-1].strip()
+                playerTeam = importer.sanitizeTeam(playerTeam)
                 playerid = importer.lookupPlayer(cur, playerName, playerTeam, position)
                 cur.execute(insertActualResult, (playerid, str(week), position, str(rank)))
                 rank = rank + 1

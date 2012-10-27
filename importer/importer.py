@@ -25,15 +25,20 @@ def find(lines, week, pos):
     return lines[startIndex+1:endIndex]
 
 
-"""Checks to see if a player is in the database.  If they are not, we can insert them"""
-#Checks to see if a player is in the database.  If they are, it returns the player id, 
-# if they are not, it inserts them, then returns the playerid
+"""Checks to see if a player is in the database.  If they are not, we can insert them.  Either way, returns
+the unique identifier (idp) of the player"""
 def lookupPlayer(cur, playerName, playerTeam, position):
+    #TODO:  We currently lookup only by name, but there could be the case where two 
+    #players with the same name are actually different players.  For example, there
+    #were two Steve Smiths playing a few years back.
+    
+    #If we lookup by team and name however, we fail to track players in and out of 
+    #free agency, as well as when they get traded.
     lookup = "select idp from player where name = %s"
-    cur.execute(lookup, playerName)
+    cur.execute(lookup, (playerName))
     rows = cur.fetchall()
     if len(rows) == 0:
-        print "Creating a new record for ", playerName
+        print "Creating a new record for ", playerName, playerTeam
         insert = "insert into player(name, team, position) values (%s,%s,%s)"
         cur.execute(insert, (playerName, playerTeam, position));
         id = cur.lastrowid
@@ -41,3 +46,45 @@ def lookupPlayer(cur, playerName, playerTeam, position):
         return id
     else:
         return rows[0][0]
+
+# A listing of the valid teams we recognize
+def validTeams():
+    #32 NFL Teams + FA for Free Agent players
+    return ['NO','NE','GB','DET','CAR','NYG','ATL','PHI',
+    'PIT','SD','DEN','BAL','DAL','HOU','CHI','SF',
+    'WAS','CIN','TB','IND','BUF','OAK','STL','TEN',
+    'KC','MIN','SEA','NYJ','JAX','MIA','ARI','CLE','FA']
+
+
+     
+"""Cleans up the various different incarnations of team abbreviations and standardizes them"""
+def sanitizeTeam(input):
+    #Some sites use non-standard abbreviations for teams just as Jacksonville or Washington, this simply standardizes
+    commonAliases = {"JAC" : "JAX", "WSH": "WAS", "" : "FA"}  
+    team = input.upper().strip();   #Get rid of capitalization issues and padding
+    if team in commonAliases:   
+        team = commonAliases[team]
+    if team in validTeams():
+        return team
+    else:
+        raise ValueError('Could not determine a mapping for teamCode [%s]' % input)
+    
+        
+""" This function is currently manually maintained, we track any players whose names vary across sites"""
+def sanitizePlayerName(input):
+    aliasDict = { 
+      "Robert Griffin" : "Robert Griffin III",  
+      "Ben Watson" : "Benjamin Watson",
+      "Dave Thomas" : "David Thomas",
+      "Steve Johnson" : "Stevie Johnson"
+    }
+    if input in aliasDict:
+        return aliasDict[input]
+    else:
+        return input
+    
+    
+    
+    
+    
+    

@@ -31,7 +31,9 @@ for fname in sys.argv[1:]:
             rank = 1
             for player in players:
                 playerName = player.split(',')[0].strip()
+                playerName = importer.sanitizePlayerName(playerName)
                 playerTeam = player.split(',')[1].strip()
+                playerTeam = importer.sanitizeTeam(playerTeam)
                 playerid = importer.lookupPlayer(cur, playerName, playerTeam, position)
                 cur.execute(predictionInsert % (analystid, playerid, str(week), position, str(rank)))
                 rank = rank + 1
