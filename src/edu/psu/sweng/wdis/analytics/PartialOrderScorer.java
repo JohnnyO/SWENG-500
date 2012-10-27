@@ -45,4 +45,9 @@ public class PartialOrderScorer implements Scorer {
 
     }
 
+    @Override
+    public String getLabel() {
+        return "PartialOrder";
+    }
+
 }

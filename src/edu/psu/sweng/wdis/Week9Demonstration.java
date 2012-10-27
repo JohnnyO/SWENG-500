@@ -19,7 +19,7 @@ public class Week9Demonstration {
         DBInterface db = new DBInterface();
         
         Position [] positions = {Position.QB, Position.RB, Position.WR, Position.TE};
-        int [] analysts = {1,3,4,5};
+        int [] analysts = {1,2,3,4,5};
         for (int ida : analysts) {
             Analyst analyst = db.getAnalyst(ida);
         for(int week=1; week < 7; week++) {
@@ -29,7 +29,7 @@ public class Week9Demonstration {
                    Scorer scorer = new PartialOrderScorer();
                    float score = scorer.evaluate(prediction, result);
                    
-                   db.savePrediction(analyst, week, p, score, "partialOrder");
+                   db.savePrediction(analyst, week, p, score, scorer.getLabel());
                    
                    System.out.format("%d\t%s\t%s\t%.5f\n", ida, week, p.name(), score);
                }

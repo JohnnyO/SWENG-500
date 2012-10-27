@@ -80,7 +80,7 @@ public class DBInterface {
 
     
     private static final String SAVE_PREDICTION = 
-            "INSERT INTO predictionAccuracy "
+            "INSERT IGNORE INTO predictionAccuracy "
             + "(ida, week, position, accuracy, accuracyType) "
             + "VALUES (?,?,?,?,?)";
     

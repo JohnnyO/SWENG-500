@@ -29,4 +29,9 @@ public class SpearmanRankScorer implements Scorer {
         return result;
     }
 
+    @Override
+    public String getLabel() {
+        return "SpearmanRank";
+    }
+
 }
