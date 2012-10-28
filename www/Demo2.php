@@ -1,4 +1,4 @@
-<!-- Web Site:      Who Do I Start
+<!-- Web Site:      Grid Iron Grades
      File:          index.php 
      Description:   This PHP will act as a the starting page for the website and
                     energize the scripts required to build the page. 
@@ -16,22 +16,41 @@
   
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-        <title>Who Do I Start</title>
+        <title>Grrid Iron Grades</title>
+        <script type="text/javascript" src="Ajax.js"></script>
+        <script type="text/javascript" src="PickingPlayers.js"></script>
+        <script type="text/javascript" src="text-utils.js"></script>
+        <script language="javascript" type="text/javascript">
+            var request = getRequest();
+            var player1List = null; //["Bob", "Fred", "Mary", "Joe"];
+            var player2List = null; //["Blade", "Laser", "Blaser", "Chuck"];  
+        </script>       
         <link type="text/css" href="jquery-ui-1.8.24.custom/css/ui-lightness/jquery-ui-1.8.24.custom.css" rel="stylesheet" />
 		<script type="text/javascript" src="jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
 		<script type="text/javascript">
              $(function() 
              {
-                var availablePos = [
-                    "QB",
-                    "WR",
-                    "RB"    
-                ];
+                var availablePos = ["QB","WR","RB"];
                 $( "#pos" ).autocomplete({
                 source: availablePos
                 });
             });
+            
+            $(function()
+            {
+                $( "#player1" ).autocomplete({
+                source: player1List
+                });
+            });
+            
+            $(function()
+            {
+                $( "#player2" ).autocomplete({
+                source: player2List
+                });
+            });
+            
         </script>
     </head>
   
@@ -41,7 +60,7 @@
         <div class="ui-widget">
             <h3>Step 1: Choose a Position</h3>
             <label for="pos">Position: </label>
-            <input id="pos" />
+            <input id="pos" onChange="getPlayers();"/>
         
             <h3>Step 2: Choose 1st Player</h3>
             <label for="player1">Player 1: </label>

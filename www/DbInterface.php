@@ -1,7 +1,7 @@
 <?php
 
 /*================================================================================================= 
-    Web Site:      Who Do I Start
+    Web Site:      Grid Iron Grades
     File:          DbInterface.php 
     Description:   This PHP class will contain the functions required to get information on the 
                    clients browser. This will be used to the target the correct browser with the 
@@ -29,8 +29,8 @@ class DbInterface
         $this->dbAddress = "localhost:3306";
         $this->dbLogIn = "root";
         $this->dbPassword = "developer1";
-        $this->database = "test";
-        $this->table = "Player";
+        $this->database = "wdis";
+        $this->table = "player";
     }
     
     function connectDb()
@@ -67,9 +67,25 @@ class DbInterface
        
     }
     
+    function dbQueryPlayerPos($position)
+    {
+        var $arrayIndex = 0;
+        var $resultArray = array();
+        
+        $qResult = mysql_query("SELECT idp, name, team FROM Player WHERE position = '$position'");
+        
+        while ($row = mysql_fetch_assoc($qResult))
+        {
+          $resultString = $resultString . $row['idp'] . $row['name'] . $row['team'] . ","; 
+        }
+        
+        return $resultString;
+    }
+    
     function dbPositionQuery($position)
     {
-        $posResult = mysql_query("SELECT $$position FROM {$table}");
+        $posResult = mysql_query("SELECT $position FROM {$table}");
+        
         if (!$posResult)
         {
             return NULL;
