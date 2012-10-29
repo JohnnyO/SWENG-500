@@ -18,7 +18,7 @@ function sendRequest(url)
 
 function getPlayers()
 {
-    var playerPos = document.getElementByTd("pos").value;
+    var playerPos = document.getElementById("PosPick").value;
     var url1 = "autoComplete.php?pos=" + escape(playerPos);
     alert("I got to getPlayers()");
     sendRequest(url1);

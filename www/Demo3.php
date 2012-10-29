@@ -16,7 +16,7 @@
   
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-        <title>Grrid Iron Grades</title>
+        <title>Grid Iron Grades</title>
         <script type="text/javascript" src="Ajax.js"></script>
         <script type="text/javascript" src="PickingPlayers.js"></script>
         <script language="javascript" type="text/javascript">
@@ -28,43 +28,46 @@
 		<script type="text/javascript" src="jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
 		<script type="text/javascript">
-             $(function() 
-             {
-                var availablePos = ["QB","WR","RB"];
-                $( "#pos" ).autocomplete({
-                source: availablePos
-                });
-            });
+            var requestURL = "autoComplete.php?pos=QB";
             
             $(function()
             {
                 $( "#player1" ).autocomplete({
-                source: player1List
-                });
+		        source: requestURL
+                 });
             });
             
             $(function()
             {
                 $( "#player2" ).autocomplete({
-                source: player2List
-                });
+		        source: requestURL
+                 });
             });
             
-            $("#pos").click(function()
+            function changeURL()
             {
-                getPlayers();
+                requestURL = "autoComplete.php?pos=" + document.getElementById("PosPick").value
+                $('#player1').autocomplete("option",{source: requestURL});
+                $('#player2').autocomplete("option",{source: requestURL});
             }
-            
         </script>
     </head>
   
     <body>
-        <h1>Welcome to "Grid Iron Grades"</h1>
+<img src="sweng.gif">
+
+       
         <hr/>
+        <select name="PositionPick" id="PosPick" onChange="changeURL();">
+            <option value="QB">QB</option>
+            <option value="RB">RB</option>
+            <option value="WR">WR</option>
+            <option value="TE">TE</option>
+        </select>
         <div class="ui-widget">
-            <h3>Step 1: Choose a Position</h3>
+            <!--<h3>Step 1: Choose a Position</h3>
             <label for="pos">Position: </label>
-            <input id="pos" onclick="getPlayers();"/>
+            <input id="pos" onclick="getPlayers();"/>-->
         
             <h3>Step 2: Choose 1st Player</h3>
             <label for="player1">Player 1: </label>
@@ -74,6 +77,7 @@
             <label for="player2">Player 2: </label>
             <input id="player2" />      
         </div>
+<img src="graph.php">
         <hr/>
     </body>
 </html>

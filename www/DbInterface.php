@@ -36,7 +36,7 @@ class DbInterface
     function connectDb()
     {
         $con = mysql_connect("localhost:3306", "root", "developer1");
-        $dbcon = mysql_select_db("test");
+        $dbcon = mysql_select_db("wdis");
         if (!$con)
         {
             return FALSE;
@@ -69,18 +69,43 @@ class DbInterface
     
     function dbQueryPlayerPos($position)
     {
-        var $arrayIndex = 0;
-        var $resultArray = array();
+        $arrayIndex = 0;
+        $resultArray = array();
         
-        $qResult = mysql_query("SELECT idp, name, team FROM Player WHERE position = '$position'");
-        
+        $qResult = mysql_query("SELECT idp, name, team FROM player WHERE position = '$position'");
+        $resultString = "[";
         while ($row = mysql_fetch_assoc($qResult))
         {
-          $resultString = $resultString . $row['idp'] . $row['name'] . $row['team'] . ","; 
+          $resultString = $resultString . "\"". $row['name'] ."\","; 
         }
+        $resultString = $resultString . "\"JohnnyO\"]";
         
         return $resultString;
     }
+
+
+
+
+    function dbQueryPlayerPosAndName($position, $partialName)
+    {
+        $arrayIndex = 0;
+        $resultArray = array();
+
+        $qResult = mysql_query("SELECT idp, name, team FROM player WHERE position = '$position' and name like '%$partialName%'");
+        $resultString = "[";
+        while ($row = mysql_fetch_assoc($qResult))
+        {
+          $resultString .= "{ \"label\": \"" .$row['name']."\",";
+          $resultString .= "  \"value\": \"" .$row['name']."\"},";
+        }
+        $resultString .= "{\"label\": \"\", \"value\": \"\"}]";
+
+        return $resultString;
+    }
+
+
+
+
     
     function dbPositionQuery($position)
     {

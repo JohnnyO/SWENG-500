@@ -11,12 +11,13 @@
 
 require_once 'DbInterface.php';
 
-var $theDatabase = new DbInterface;
+$theDatabase = new DbInterface();
 
 $theDatabase->connectDb();
 
-$searchPos = $_GET['pos'];
-$theResults = $theDatabase->dbQueryPlayerPos($searchPos);
+$position = $_GET['pos'];
+$partialName = $_GET['term'];
+$theResults = $theDatabase->dbQueryPlayerPosAndName($position, $partialName);
 
 echo $theResults;
 ?>
