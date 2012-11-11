@@ -27,7 +27,7 @@ public class SpearmanRankScorerTest extends ScorerTest {
      * Test case 2.6
      */
     public void testPerfectPrediction() {
-        super.testPerfectPrediction();
+        assertEquals(1.0, super.calculatePerfectPrediction(), 1e-6);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class SpearmanRankScorerTest extends ScorerTest {
      * Test case 2.7
      */
     public void testReversePrediction() {
-        super.testReversePrediction();
+        assertEquals(-1.0, super.calculateReversePrediction(), 1e-6);
     }
 
     /**
@@ -77,14 +77,13 @@ public class SpearmanRankScorerTest extends ScorerTest {
 
     }
 
-    @Test(expected = Exception.class)
     /**
      * Test case 2.11
      */
+    @Test(expected = IllegalArgumentException.class)
     public void testBadData() {
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C");
         Ranking result = generateActualResult(1, Position.QB, "D", "E", "F");
-
         float score = scorer.evaluate(prediction, result);
     }
 }

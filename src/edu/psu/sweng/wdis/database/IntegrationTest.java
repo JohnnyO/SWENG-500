@@ -18,7 +18,7 @@ public class IntegrationTest {
         ActualResult result = database.getActualResults(2, Position.QB);
         Scorer scorer = new PartialOrderScorer();
         float score = scorer.evaluate(prediction, result);
-        assertEquals(0.0d, score, 1e-4);
+        assertEquals(0.0315d, score, 1e-4);
     }
     
     

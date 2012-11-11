@@ -10,14 +10,16 @@ public class SpearmanRankScorer implements Scorer {
     public float evaluate(Prediction prediction, Ranking actualResult) {
         
         double deltaSquared = 0;
+        int missingPlayers = 0;
         double n = prediction.size();
         for (int i=0; i < prediction.size(); i++) {
             Player player = prediction.get(i);
             int actualPosition = actualResult.getRank(player);
             if (actualPosition == -1) {
-                deltaSquared += Math.pow(i - prediction.size(), 2);
-                System.err.println("WARNING: " +player + " not listed in actualResults");
-                //throw new IllegalArgumentException("ActualResult not available for "  + player);
+                missingPlayers++;
+                deltaSquared += Math.pow(prediction.size() - missingPlayers, 2);
+                //System.err.println("WARNING: " +player + " not listed in actualResults");
+                throw new IllegalArgumentException("ActualResult not available for "  + player);
             }
             
             deltaSquared += Math.pow(i - actualPosition, 2);

@@ -36,7 +36,7 @@ public class PartialOrderScorerTest extends ScorerTest {
      * Implementation of test case 2.1
      */
     public void testPerfectPrediction() {
-        super.testPerfectPrediction();
+        assertEquals(1.0, super.calculatePerfectPrediction(), 1e-6);
     }
 
     /**
@@ -84,7 +84,8 @@ public class PartialOrderScorerTest extends ScorerTest {
      */
     @Test
     public void testReversePrediction() {
-        super.testReversePrediction();
+        assertEquals(-1, super.calculateReversePrediction(), 1e-6);
+        
     }
     
     

@@ -33,22 +33,21 @@ public class ScorerTest {
         return new ActualResult(week, position, genPlayerList(names));
     }
 
-    public void testPerfectPrediction() {
+    public float calculatePerfectPrediction() {
     
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
         Ranking result = generateActualResult(1, Position.QB, "A", "B", "C", "D", "E");
     
-        float score = scorer.evaluate(prediction, result);
-        assertEquals(1, score, 1e-6);
+        return scorer.evaluate(prediction, result);
     }
 
-    public void testReversePrediction() {
+    public float calculateReversePrediction() {
     
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
         Ranking result = generateActualResult(1, Position.QB, "E", "D", "C", "B", "A");
     
-        float score = scorer.evaluate(prediction, result);
-        assertEquals(-1, score, 1e-6);
+        return  scorer.evaluate(prediction, result);
+        
     }
 
 
