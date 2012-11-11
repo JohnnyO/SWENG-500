@@ -1,5 +1,5 @@
-<!-- Web Site:      Who Do I Start
-     File:          index.php 
+<!-- Web Site:      Drig Iron Gra
+     File:          index.php des
      Description:   This php based code will act as the initial page for the website. 
                     It will determine the browser type accessing the site and then
                     have the server supply the browser with the appropriate form of the
@@ -17,7 +17,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   
     <head>
-        <title>Who Do I Start</title>
+        <title>Grid Iron Grades</title>
     </head>
   
     <body>

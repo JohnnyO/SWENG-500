@@ -54,30 +54,53 @@
     </head>
   
     <body>
-<img src="sweng.gif">
-
-       
+        <img src="sweng.gif">
         <hr/>
+        <h3>Step 1: Choose Player Position</h3>
         <select name="PositionPick" id="PosPick" onChange="changeURL();">
             <option value="QB">QB</option>
             <option value="RB">RB</option>
             <option value="WR">WR</option>
             <option value="TE">TE</option>
-        </select>
-        <div class="ui-widget">
-            <!--<h3>Step 1: Choose a Position</h3>
-            <label for="pos">Position: </label>
-            <input id="pos" onclick="getPlayers();"/>-->
-        
+        </select><p/>      
+        <p></p>
+        <form name="btn_form" method="POST" action="">
+            <p>
             <h3>Step 2: Choose 1st Player</h3>
             <label for="player1">Player 1: </label>
-            <input id="player1" />
-        
+            <input id="player1"  name="player1"/>
+            </p>
+            <p>
             <h3>Step 3: Choose 2nd Player</h3>
             <label for="player2">Player 2: </label>
-            <input id="player2" />      
-        </div>
-<img src="graph.php">
+            <input id="player2" name="player2"/>
+            </p>
+            <p> 
+            <label>
+                <input type="submit" name="pButton" id="pButton" value="Submit"/>
+            </label>
+            </p>
+        </form>
+        <hr/>
+        <?php
+            //This code is used to generate the tables based on the input to the form.       
+            require_once 'DbInterface.php';    
+                
+            if ((isset($_POST['player1'])) and (isset($_POST['player2'])))  
+            {
+                $theDatabase = new DbInterface();
+                $theDatabase->connectDb();
+                
+                echo "<p/>";    
+                echo "<table><tr><td>";
+                echo $theDatabase->getPredictions($_POST['player1'], 7);
+		        echo "</td><td>";  
+                echo $theDatabase->getPredictions($_POST['player2'], 7);  
+                echo "</td></tr></table>";
+                echo "<hr/>";
+                echo "<img src=\"graph.php\"/>";
+           }
+        ?> 
         <hr/>
     </body>
 </html>

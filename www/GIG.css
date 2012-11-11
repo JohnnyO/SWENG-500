@@ -1,0 +1,107 @@
+/*================================================================================================= 
+    Web Site:      Grid Iron Grades
+    File:          GIG.css 
+    Description:   This is the CSS for the website.
+    Company:       Team 2
+    Copywrite:     N/A
+    Author:        JTM
+    Rev. History:  11/4/12 -- Initial Rev. to start formulating final web layout.
+===================================================================================================*/
+
+/*CSS for the body*/
+body
+{
+    background-color:#000000;
+    color:#FF6600;
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;  
+}
+
+#wrapper
+{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#Banner
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#CenterForm
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#qbBtn
+{
+    display:block;
+    height:38px;
+    width:79px;
+    border-width:0px;
+    background:url(../Graphics/qbBtnNorm.png);
+}
+#qbBtn:hover
+{
+    background:url(../Graphics/qbBtnHover.png);
+}
+
+#rbBtn
+{
+    display:block;
+    height:38px;
+    width:79px;
+    border-width:0px;
+    background:url(../Graphics/rbBtnNorm.png);
+}
+#rbBtn:hover
+{
+    background:url(../Graphics/rbBtnHover.png);
+}
+
+#wrBtn
+{
+    display:block;
+    height:38px;
+    width:79px;
+    border-width:0px;
+    background:url(../Graphics/wrBtnNorm.png);
+}
+#wrBtn:hover
+{
+    background:url(../Graphics/wrBtnHover.png);
+}
+
+#teBtn
+{
+    display:block;
+    height:38px;
+    width:79px;
+    border-width:0px;
+    background:url(../Graphics/teBtnNorm.png);
+}
+#teBtn:hover
+{
+    background:url(../Graphics/teBtnHover.png);
+}
+
+/*CSS for page item changes*/
+input
+{
+    border:1px solid #FF6600;
+    background:#000000;
+    color:#FF6600;
+}
+
+table
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+  
+

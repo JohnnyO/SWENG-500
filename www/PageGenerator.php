@@ -10,8 +10,6 @@
 ===================================================================================================*/
 class PageGenerator
 {
-    //Declarations of local data. 
-    
     //Constructor
     function PageGenerator()
     {
@@ -52,15 +50,6 @@ class PageGenerator
         //print "Android";
         header("Location:http://209.252.235.46/MobileSite.php");
         return TRUE;
-    }
-    
+    }   
 }
-
-
-
-
-
-
-
-
 ?>

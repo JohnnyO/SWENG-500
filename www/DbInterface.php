@@ -83,7 +83,31 @@ class DbInterface
         return $resultString;
     }
 
+    function getPredictions($playerName, $week) {
+         $result = mysql_query("select 
+                       analyst.name, player.name, prediction.rankOrder
+                   from
+                 analyst,
+                 prediction,
+                 player
+                   where
+               analyst.ida = prediction.ida
+       and player.idp = prediction.idp
+       and player.name = '$playerName'
+   and week='$week'");
+         $resultString = "<table border=1>";
+         $resultString .= "<tr><th>Analyst</th><th>Player</th><th>Pred. Rank</th></tr>";
+         while ($row = mysql_fetch_row($result)) {
+              
+              $resultString .= '<tr> <td>'. $row[0]. '</td>';
+              $resultString .= '<td>'. $row[1]. '</td>';
+              $resultString .= '<td>'. $row[2]. '</td>';
+              $resultString .= '</tr>';
+         }  
+         return $resultString."</table>";
 
+
+    }
 
 
     function dbQueryPlayerPosAndName($position, $partialName)
@@ -123,17 +147,17 @@ class DbInterface
     
     
     //This is a function to use for the demo.
-   /* function getDemoTable()
+    function getPlayersTables()
     {
-        $dbAddress = "localhost:3306";
+        /*$dbAddress = "localhost:3306";
         $dbLogIn = "root";
         $dbPassword = "developer1";
         
         $database = "wdis";
         $table = "website_demo";
         
-        $con = mysql_connect(localhost, root, developer1);
-        if (!con)
+        $con = mysql_connect(localhost, root, developer1);*/
+        /*if (!con)
         {
             die("Could not connect: " . mysql_error());
         }else{
@@ -164,10 +188,31 @@ class DbInterface
                 echo "</tr>\n";
             }
             echo "</table>";
-            mysql_free_result($result);    
-        }
+            mysql_free_result($result); */
+            
+            //Load DOM information for the queries.
+            //$doc = new DOMDocument();
+            //$doc->load('Demo3.php');
+            
+            //$player1 = $doc->getElementById("player1");
+            //$player1 = $player1->item(0)->nodeValue;
+            //$player2 = $doc->getElementByID("player2");
+            //$player2 = $player2->item(0)->nodeValue;
+            
+            //Place queries here.
+            
+            //Code to make tables.
+            echo "<h1>Table: Predicted vs Actuals (Player 1)</h1>";
+            echo "<table border = '1'>";
+            //Set rows.
+            echo "<tr><th>Week</th><th>Prediction</th><th>Actual</th></tr>";
+                echo "<td>Empty1</td>";
+                echo "<td>Empty2</td>";
+                echo "<td>Empty3</td>";
+           echo "</table>";               
+        //}
         
         return TRUE; 
-    }*/
+    }
 }
 ?>

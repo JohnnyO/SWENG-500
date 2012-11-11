@@ -41,7 +41,7 @@ class BrowserInfo
             }
             if(strstr($_SERVER['HTTP_USER_AGENT'],'Android'))
             {
-                return android;
+                return Android;
             }
             if(strstr($_SERVER['HTTP_USER_AGENT'],'Chrome'))
             {
