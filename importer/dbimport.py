@@ -26,7 +26,7 @@ for fname in sys.argv[1:]:
     
     
     for week in range(1,17):
-        for position in ("QB","RB","WR","TE"):
+        for position in ("QB","RB","WR","TE","K"):
             players =  importer.find(lines, str(week), position)
             rank = 1
             for player in players:
