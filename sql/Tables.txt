@@ -22,20 +22,14 @@ CREATE  TABLE analyst(
 );
 
 
-create table ranking(
-idp int not null,
-ida int not null,
-prediction int,
-foreign key (idp) references player(idp),
-foreign key (ida) references analyst(ida)
-);
 
 
 CREATE  TABLE actualResult(
   idp INT NOT NULL,
   position VARCHAR(256) NOT NULL,
   week INT NOT NULL,
-  rank INT NOT NULL ,
+  rank INT NOT NULL,
+  score INT NOT NULL,
   PRIMARY KEY (idp, position, week, rank),
   FOREIGN KEY (idp) REFERENCES player(idp)
 );
