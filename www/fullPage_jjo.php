@@ -119,7 +119,7 @@
 					accuracyType = 'WeightedPartialOrder' 
 					AND week = $week
 					AND (player.name = '$player1' or player.name = '$player2') 
-					GROUP BY analystID , analyst.name , station , total";
+					GROUP BY analystID , analyst.name , station , total ORDER BY total DESC";
 					
 				
 
