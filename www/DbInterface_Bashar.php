@@ -45,12 +45,6 @@ class DbInterface
         }
     }
     
-    function closeDbConnection()
-    {
-        mysql_close($con);
-        return TRUE;
-    }
-    
     function dbQueryPlayerComp($playerName1, $playerName2)
     {
         $qResult1 = mysql_query("SELECT * FROM Player WHERE name = '$playerName1'");
@@ -100,15 +94,19 @@ class DbInterface
                analyst.ida = prediction.ida
        and player.idp = prediction.idp
        and player.name = '$playerName'
-   and week='$week'");
+       and week='$week'");
          $resultString = "<table border=1>";
          $resultString .= "<tr><th>Analyst</th><th>Player</th><th>Pred. Rank</th></tr>";
-         while ($row = mysql_fetch_row($result)) {
+         $index = 0;
+         while ($row = mysql_fetch_row($result)) 
+         {
               
               $resultString .= '<tr> <td>'. $row[0]. '</td>';
               $resultString .= '<td>'. $row[1]. '</td>';
               $resultString .= '<td>'. $row[2]. '</td>';
               $resultString .= '</tr>';
+              $ar1[index] = $row[2];
+              $index++;
 
              # ar1 = array('row[2]'); 
          }  
@@ -137,7 +135,7 @@ class DbInterface
         }
         $resultString .= "{\"label\": \"\", \"value\": \"\"}]";
 
-        return $resultString;  
+        return $resultString;
     }
 
 
@@ -156,6 +154,76 @@ class DbInterface
         {
             return $posResult;
         }
+    }
+    
+    
+    //This is a function to use for the demo.
+    function getPlayersTables()
+    {
+        /*$dbAddress = "localhost:3306";
+        $dbLogIn = "root";
+        $dbPassword = "developer1";
+        
+        $database = "wdis";
+        $table = "website_demo";
+        
+        $con = mysql_connect(localhost, root, developer1);*/
+        /*if (!con)
+        {
+            die("Could not connect: " . mysql_error());
+        }else{
+            if (!mysql_select_db($database))
+                die("Can not connect to database");
+            $result = mysql_query("SELECT * FROM {$table}");
+            if (!$result)
+            {
+                die("Query Failed!");
+            }
+            $numFields = mysql_num_fields($result);
+            
+            echo "<h1>Table: {$table}</h1>";
+            echo "<table border='1'><tr>";
+            
+            for ($i=0; $i<$numFields; $i++)
+            {
+                $field = mysql_fetch_field($result);
+                echo "<td>{$field->name}</td>";
+            }
+            echo "</tr>\n";
+            
+            while($row = mysql_fetch_row($result))
+            {
+                echo "<tr>";
+                foreach($row as $cell)
+                    echo "<td>$cell</td>";
+                echo "</tr>\n";
+            }
+            echo "</table>";
+            mysql_free_result($result); */
+            
+            //Load DOM information for the queries.
+            //$doc = new DOMDocument();
+            //$doc->load('Demo3.php');
+            
+            //$player1 = $doc->getElementById("player1");
+            //$player1 = $player1->item(0)->nodeValue;
+            //$player2 = $doc->getElementByID("player2");
+            //$player2 = $player2->item(0)->nodeValue;
+            
+            //Place queries here.
+            
+            //Code to make tables.
+            echo "<h1>Table: Predicted vs Actuals (Player 1)</h1>";
+            echo "<table border = '1'>";
+            //Set rows.
+            echo "<tr><th>Week</th><th>Prediction</th><th>Actual</th></tr>";
+                echo "<td>Empty1</td>";
+                echo "<td>Empty2</td>";
+                echo "<td>Empty3</td>";
+           echo "</table>";               
+        //}
+        
+        return TRUE; 
     }
 }
 ?>
