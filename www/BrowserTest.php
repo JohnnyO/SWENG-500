@@ -1,6 +1,6 @@
 <?php
 /*================================================================================================= 
-    Web Site:      Who Do I Start
+    Web Site:      Grid Iron Grades
     File:          BrowserTest.php 
     Description:   This PHP script will initialize the PHPUnit test for the BrowserInfo.php.
     Company:       Team 2

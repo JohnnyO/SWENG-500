@@ -36,6 +36,14 @@ body
     margin-right: auto;
 }
 
+#ResultsGraph
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*This section of CSS handles the hover buttons on the site.*/
 #qbBtn
 {
     display:block;
@@ -102,6 +110,11 @@ table
     margin-right: auto;
 }
 
+ hr
+{
+     color:#FF6600;
+     background-color:#FF6600;
+}
 
   
 

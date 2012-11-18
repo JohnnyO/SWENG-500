@@ -11,15 +11,18 @@
 
 require_once 'DbInterface.php';
 
-$theDatabase = new DbInterface();
-
-$theDatabase->connectDb();
-
-$position = $_GET['pos'];
-$partialName = $_GET['term'];
-$theResults = $theDatabase->dbQueryPlayerPosAndName($position, $partialName);
-
-$theDatabase->closeDbConnection();
-
-echo $theResults;
+class autoCompleteClass
+{
+    function getAutoComplete($pos, $term)
+    {
+        $theDatabase = new DbInterface();
+        $theDatabase->connectDb();
+        $position = $pos;
+        $partialName = $term;
+        $theResults = $theDatabase->dbQueryPlayerPosAndName($position, $partialName);
+        
+        return $theResults;
+           
+    }
+}
 ?>

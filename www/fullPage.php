@@ -17,17 +17,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Grid Iron Grades</title>
         <link rel="stylesheet" type="text/css" href="GIG.css">
-        <script type="text/javascript" src="PickingPlayers.js"></script>
-        <script language="javascript" type="text/javascript">
-            var request = getRequest();
-            var player1List = null; 
-            var player2List = null; 
-        </script>       
         <link type="text/css" href="jquery-ui-1.8.24.custom/css/ui-lightness/jquery-ui-1.8.24.custom.css" rel="stylesheet" />
 		<script type="text/javascript" src="jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
 		<script type="text/javascript">
-            changeURL("QB");
+           requestURL = "autoComplete.php?pos=QB";
             
             $(function()
             {
@@ -52,13 +46,15 @@
         </script>
     </head>
   
-    <body>
+    <body onload="changeURL('QB');">
         <div id="wrapper">
             <img id="Banner" src="sweng.gif">
-            </p>
+            <p></p>
             <div id="pickPlayerDiv">
                 <img src="Graphics/selectPlayers.png">
             </div>
+            <br>
+            <br>
             <table border="0">
                 <tr>
                     <td><button id="qbBtn" onClick="changeURL('QB');"></button></td>
@@ -66,9 +62,12 @@
                     <td><button id="wrBtn" onClick="changeURL('WR');"></button></td>
                     <td><button id="teBtn" onClick="changeURL('TE');"></button></td>
                 </tr>
-            </p>
-            </p>
-            </p>
+            </table>
+            <p></p>
+            <p></p>
+            <p></p>
+            <br>
+            <br>
             <form name="btn_form" method="POST" action="">
                 <table border="0">
                     <tr>
@@ -91,8 +90,12 @@
                         <td><label><input type="submit" name="pButton" id="pButton" value="Submit"/></label></td>
                         <td></td>
                     </tr>
-                </p>
+                </table>
+                <p></p>
             </form>
+            <p></p>
+            <br>
+            <br>
         <?php
             //This code is used to generate the tables based on the input to the form.       
             require_once 'DbInterface.php';    
@@ -102,14 +105,19 @@
                 $theDatabase = new DbInterface();
                 $theDatabase->connectDb();
                 
-                echo "<p/>";    
+                echo "<p></p>"; 
+                echo "<img src=\"Graphics/tComp.png\">"; 
+                echo "<p></p>";   
                 echo "<table><tr><td>";
                 echo $theDatabase->getPredictions($_POST['player1'], 7);
 		        echo "</td><td>";  
                 echo $theDatabase->getPredictions($_POST['player2'], 7);  
                 echo "</td></tr></table>";
-                echo "<hr/>";
-                echo "<img src=\"graph.php\"/>";
+                echo "<p></p>";
+                echo "<img src=\"Graphics/graphHis.png\">";
+                echo "<p></p><p></p>";
+                echo "<img id=\"ResultsGraph\" src=\"graph.php?player1=".$_POST['player1']."&player2=".$_POST['player2']."\"/>";
+                echo "<hr>";
            }
         ?> 
     </div>
