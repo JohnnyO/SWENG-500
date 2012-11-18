@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.psu.sweng.wdis.database.ActualResult;
 import edu.psu.sweng.wdis.database.Player;
 import edu.psu.sweng.wdis.database.Position;
 import edu.psu.sweng.wdis.database.Prediction;
@@ -47,7 +48,7 @@ public class PartialOrderScorerTest extends ScorerTest {
     public void testBadPrediction() {
 
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        Ranking result = generateActualResult(1, Position.QB, "F", "G", "H", "I", "J");
+        ActualResult result = generateActualResult(1, Position.QB, "F", "G", "H", "I", "J");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(-1.0, score, 1e-6);
@@ -60,7 +61,7 @@ public class PartialOrderScorerTest extends ScorerTest {
     public void testClosePrediction() {
 
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        Ranking result = generateActualResult(1, Position.QB, "A", "B", "C", "F", "E");
+        ActualResult result = generateActualResult(1, Position.QB, "A", "B", "C", "F", "E");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(0.80, score, 1e-6);
@@ -73,7 +74,7 @@ public class PartialOrderScorerTest extends ScorerTest {
     public void testReorderedPrediction() {
 
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        Ranking result = generateActualResult(1, Position.QB, "A", "C", "B", "D", "E");
+        ActualResult result = generateActualResult(1, Position.QB, "A", "C", "B", "D", "E");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(0.80, score, 1e-6);
@@ -92,7 +93,7 @@ public class PartialOrderScorerTest extends ScorerTest {
     @Test
     public void testMisguidedPrediction() {
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B");
-        Ranking result = generateActualResult(1, Position.QB, "D", "E", "A", "C", "B");
+        ActualResult result = generateActualResult(1, Position.QB, "D", "E", "A", "C", "B");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(1.0, score, 1e-6);
@@ -101,7 +102,7 @@ public class PartialOrderScorerTest extends ScorerTest {
     @Test
     public void testReverseMisguidedPrediction() {
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B");
-        Ranking result = generateActualResult(1, Position.QB, "D", "E", "B", "C", "A");
+        ActualResult result = generateActualResult(1, Position.QB, "D", "E", "B", "C", "A");
 
         float score = scorer.evaluate(prediction, result);
         assertEquals(-1.0, score, 1e-6);

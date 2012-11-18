@@ -1,5 +1,6 @@
 package edu.psu.sweng.wdis.analytics;
 
+import edu.psu.sweng.wdis.database.ActualResult;
 import edu.psu.sweng.wdis.database.Player;
 import edu.psu.sweng.wdis.database.Prediction;
 import edu.psu.sweng.wdis.database.Ranking;
@@ -7,7 +8,7 @@ import edu.psu.sweng.wdis.database.Ranking;
 public class SpearmanRankScorer implements Scorer {
 
     @Override
-    public float evaluate(Prediction prediction, Ranking actualResult) {
+    public float evaluate(Prediction prediction, ActualResult actualResult) {
         
         double deltaSquared = 0;
         int missingPlayers = 0;

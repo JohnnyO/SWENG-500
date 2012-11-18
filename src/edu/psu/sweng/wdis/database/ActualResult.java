@@ -32,4 +32,12 @@ public class ActualResult extends Ranking {
         this.scores = scores;
     }
 
+    public double getScore(Player player) {
+        int rank = this.getRank(player);
+        if (rank == -1)
+            return 0;
+        else 
+        return scores.get(rank);
+    }
+
 }

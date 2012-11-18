@@ -3,6 +3,7 @@ package edu.psu.sweng.wdis.analytics;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -29,14 +30,18 @@ public class ScorerTest {
         return new Prediction(week, position, genPlayerList(names));
     }
     
-    public Ranking generateActualResult(int week, Position position, String... names) {
-        return new ActualResult(week, position, genPlayerList(names));
+    public ActualResult generateActualResult(int week, Position position, String... names) {
+        List<Double> scores = new ArrayList<Double>();
+        for (double i=names.length; i >0; i--) {
+            scores.add(i);
+        }
+        return new ActualResult(week, position, genPlayerList(names), scores);
     }
 
     public float calculatePerfectPrediction() {
     
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        Ranking result = generateActualResult(1, Position.QB, "A", "B", "C", "D", "E");
+        ActualResult result = generateActualResult(1, Position.QB, "A", "B", "C", "D", "E");
     
         return scorer.evaluate(prediction, result);
     }
@@ -44,7 +49,7 @@ public class ScorerTest {
     public float calculateReversePrediction() {
     
         Prediction prediction = generatePrediction(1, Position.QB, "A", "B", "C", "D", "E");
-        Ranking result = generateActualResult(1, Position.QB, "E", "D", "C", "B", "A");
+        ActualResult result = generateActualResult(1, Position.QB, "E", "D", "C", "B", "A");
     
         return  scorer.evaluate(prediction, result);
         

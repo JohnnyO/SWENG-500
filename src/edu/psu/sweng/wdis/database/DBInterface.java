@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
@@ -24,12 +25,25 @@ public class DBInterface {
 
     }
 
-    public List<Analyst> getKnownAnalysts() {
-        return null;
+    
+    private static final String GET_ALL_ANALYSTS = "select ida, name,station from analyst";
+    
+    
+    public List<Analyst> getKnownAnalysts() throws SQLException {
+        List<Analyst> result = new LinkedList<Analyst>();
+        PreparedStatement ps = conn.prepareStatement(GET_ALL_ANALYSTS);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int ida = rs.getInt("ida");
+            String name = rs.getString("name");
+            String station = rs.getString("station");
+            result.add(new Analyst(ida, name, station));
+        }
+        return result;
     }
 
     private static final String GET_ACTUAL_RESULT = 
-            "SELECT player.name, player.team, actualResult.rank "
+            "SELECT player.name, player.team, actualResult.rank, actualResult.score "
             + "FROM actualResult, player " 
             + "WHERE actualResult.week=? and actualResult.position=? "
             + "AND actualResult.idp = player.idp " + "ORDER BY rank ASC";
@@ -40,13 +54,15 @@ public class DBInterface {
         ps.setString(2, position.name());
         ResultSet rs = ps.executeQuery();
         List<Player> players = new ArrayList<Player>();
+        List<Double> scores = new ArrayList<Double>();
         while (rs.next()) {
             String name = rs.getString("name");
             String team = rs.getString("team");
             int rank = rs.getInt("rank");
             players.add(new Player(name, position, team));
+            scores.add(rs.getDouble("score"));
         }
-        return new ActualResult(week, position, players);
+        return new ActualResult(week, position, players, scores);
     }
 
     public Analyst getAnalyst(int analystID) {
